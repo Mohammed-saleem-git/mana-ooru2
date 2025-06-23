@@ -4,8 +4,67 @@ import Shops from "./Shops";
 import News from "./News";
 import Ads from "./Ads";
 import Community from "./Community";
+// App.jsx
+import React, { useState } from 'react';
+import './App.css';
+
 
 const Home = () => (
+const people = [
+  {
+    name: 'John Doe',
+    location: 'New York, USA',
+    description: 'Software developer from New York, passionate about open-source projects.',
+    image: 'https://source.unsplash.com/300x200/?person,1'
+  },
+  {
+    name: 'Jane Smith',
+    location: 'California, USA',
+    description: 'Community leader and educator from California who loves tech and teaching.',
+    image: 'https://source.unsplash.com/300x200/?person,2'
+  },
+  {
+    name: 'Ahmed Ali',
+    location: 'Dubai, UAE',
+    description: 'Engineer and content creator based in Dubai, focused on innovation.',
+    image: 'https://source.unsplash.com/300x200/?person,3'
+  }
+];
+
+function App() {
+  const [popup, setPopup] = useState({ show: false, person: null });
+
+  return (
+    <div className="container">
+      <h1>Our Colorful Community</h1>
+      <div className="grid">
+        {people.map((person, index) => (
+          <div className="card" key={index} onClick={() => setPopup({ show: true, person })}>
+            <img src={person.image} alt={person.name} />
+            <div className="card-content">
+              <h2>{person.name}</h2>
+              <p>{person.location}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {popup.show && (
+        <div className="popup" onClick={() => setPopup({ show: false, person: null })}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <h2>{popup.person.name}</h2>
+            <p>{popup.person.description}</p>
+            <button onClick={() => setPopup({ show: false, person: null })}>Close</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+
+
   <div>
     <h1>Welcome to Mana Ooru</h1>
     <p> Boppapur (also called Boppapuram), a village in Yellareddipet mandal, Rajanna Sircilla district, Telangana:
